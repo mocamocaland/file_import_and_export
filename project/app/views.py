@@ -37,6 +37,13 @@ def csv_export(request):
 
 
 def xls_export(request):
-    
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content_Disposition'] = 'attachment; filename=%s' % 'report.xls'
+
+    for post in Post.objects.all():
+        row = [post.pk, post.title, post.text, post.category.name]
+        
+
+    row.save(response)
 
     return response
