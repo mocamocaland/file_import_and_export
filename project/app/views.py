@@ -35,3 +35,8 @@ def csv_export(request):
  
     return response
 
+
+def xls_export(request):
+    
+
+    return response
