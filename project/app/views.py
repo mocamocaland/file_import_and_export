@@ -21,7 +21,7 @@ def csv_import(request):
             category,_ = Category.objects.get_or_create(name=line[3])
             post.category = category
             post.save()
-
+            
     return redirect('app:index')
 
 def csv_export(request):
