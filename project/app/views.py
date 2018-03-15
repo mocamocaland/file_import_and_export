@@ -10,7 +10,7 @@ from .models import Post, Category
 class IndexView(generic.TemplateView):
     template_name = 'app/app_list.html'
 
-"""
+
 class IndexView(generic.ListView):
     
     model = Post
@@ -40,4 +40,4 @@ def csv_export(request):
         writer.writerow(row)
  
     return response
-    """
+
