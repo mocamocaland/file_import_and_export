@@ -6,13 +6,7 @@ from django.views import generic
 from .models import Post, Category
 
 
-
-class IndexView(generic.TemplateView):
-    template_name = 'app/app_list.html'
-
-
 class IndexView(generic.ListView):
-    
     model = Post
 
 
