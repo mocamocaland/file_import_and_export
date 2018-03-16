@@ -10,6 +10,11 @@
     <input type="submit" value="エクスポート"> {% csrf_token %}
 </form>
 <hr>
+<form action='{% url "app:xls_export" %}' method='POST' enctype="multipart/form-data">
+    <h2>XLSエクスポート</h2>
+    <input type="submit" value="エクスポート"> {% csrf_token %}
+</form>
+<hr>
 <table border="1">
     <thead>
         <tr>

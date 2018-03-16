@@ -1,4 +1,5 @@
 import csv
+import xlwt
 from xlwt import Workbook
 from io import TextIOWrapper, StringIO
 from django.http import HttpResponse
@@ -25,6 +26,7 @@ def csv_import(request):
             
     return redirect('app:index')
 
+
 def csv_export(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=db.csv'
@@ -42,12 +44,21 @@ def xls_export(request):
     response['Content_Disposition'] = 'attachment; filename=%s' % 'report.xls'
     
     wb = Workbook()
-    ws = wb.add_sheet("sample")
+    sheet1 = wb.add_sheet("sample1")
+    sample_list = []
+    for post in Post.objects.all():
+        row = [post.pk, post.title, post.text, post.category.name]
+        sample_list.append(row)
 
-    ws.write(0,0, "Hello")
-    ws.write(0,1, "World")
-    ws.write(1,0, "Hello")
-    ws.write(1,1, "Excel")
+    sheet1.write(0,0, row[0])
+    sheet1.write(0,1, row[1])
+    sheet1.write(0,2, row[2])
+    sheet1.write(0,3, row[3])
+
+    sheet1.write(1,0, row[0])
+    sheet1.write(1,1, row[1])
+    sheet1.write(1,2, row[2])
+    sheet1.write(1,3, row[3])
 
     wb.save(response)
 
