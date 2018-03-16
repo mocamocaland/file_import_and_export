@@ -45,21 +45,23 @@ def xls_export(request):
     
     wb = Workbook()
     sheet1 = wb.add_sheet("sample1")
-    sample_list = []
+    
+
     for post in Post.objects.all():
-        row = [post.pk, post.title, post.text, post.category.name]
-        sample_list.append(row)
-
-    sheet1.write(0,0, row[0])
-    sheet1.write(0,1, row[1])
-    sheet1.write(0,2, row[2])
-    sheet1.write(0,3, row[3])
-
-    sheet1.write(1,0, row[0])
-    sheet1.write(1,1, row[1])
-    sheet1.write(1,2, row[2])
-    sheet1.write(1,3, row[3])
-
+        row_list = [post.pk, post.title, post.text, post.category.name]
+        sheet1.write(0,0, row_list[0])
+        sheet1_row_1 = sheet1.row(0)
+        sheet1_row_1.write(1, row_list[0])
+    
+    
     wb.save(response)
 
     return response
+
+'''
+    sheet1_row_1 = sheet1.row(0)
+    sheet1_row_1.write(0, row[0])
+    sheet1_row_1.write(1, row[1])
+    sheet1_row_1.write(2, row[2])
+    sheet1_row_1.write(3, row[3])
+'''
