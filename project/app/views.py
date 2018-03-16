@@ -1,4 +1,5 @@
 import csv
+from xlwt import Workbook
 from io import TextIOWrapper, StringIO
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -39,11 +40,15 @@ def csv_export(request):
 def xls_export(request):
     response = HttpResponse(content_type='application/vnd.ms-excel')
     response['Content_Disposition'] = 'attachment; filename=%s' % 'report.xls'
+    
+    wb = Workbook()
+    ws = wb.add_sheet("sample")
 
-    for post in Post.objects.all():
-        row = [post.pk, post.title, post.text, post.category.name]
-        
+    ws.write(0,0, "Hello")
+    ws.write(0,1, "World")
+    ws.write(1,0, "Hello")
+    ws.write(1,1, "Excel")
 
-    row.save(response)
+    wb.save(response)
 
     return response
